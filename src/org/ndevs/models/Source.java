@@ -1,45 +1,59 @@
 package org.ndevs.models;
 
-public class Source extends Mediator {
-    private String urlname;
-    private String pointer;
+import org.ndevs.schemes.SourceScheme;
+
+public class Source {
+    private SourceScheme uri;
+    private String body;
+    private int pointer;
     private String suffix;
 
     public Source() {
-        urlname = "example_url_name_";
-        pointer = "xxxxx";
-        suffix = ".dev";
+        uri = new SourceScheme();
+        initSource();
     }
 
-    public Source(String urlname, String pointer, String suffix) {
-        this.urlname = urlname;
-        setPointer(pointer);
-        this.suffix = suffix;
+    public Source(String uri) {
+        this.uri = new SourceScheme(uri);
+        initSource();
     }
 
-    public String getUrlname() {
-        return urlname;
+    private void initSource() {
+        setBody();
+        setPointer();
+        setSuffix();
     }
 
-    public void setUrlname(String urlname) {
-        this.urlname = urlname;
+    public String getBody() {
+        return body;
     }
 
-    public String getPointer() {
+    private void setBody() {
+        body = uri.getBody();
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public int getPointer() {
         return pointer;
     }
 
-    public void setPointer(String pointer) {
-        if (pointer.startsWith("_") && pointer.endsWith(".")) {
-            for (int i = 1; i <= 2; i++) {
-                pointer = reverse(pointer).substring(1);
-            }
-        }
+    private void setPointer() {
+        pointer = uri.getPointer();
+    }
+
+    public void setPointer(int pointer) {
         this.pointer = pointer;
     }
 
     public String getSuffix() {
         return suffix;
+    }
+
+    private void setSuffix() {
+        suffix = uri.getSuffix();
     }
 
     public void setSuffix(String suffix) {
@@ -48,6 +62,6 @@ public class Source extends Mediator {
 
     @Override
     public String toString() {
-        return urlname + pointer + suffix;
+        return body + pointer + suffix;
     }
 }
