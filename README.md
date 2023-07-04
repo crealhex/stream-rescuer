@@ -1,3 +1,3 @@
 # Stream Rescuer
 
-For love to the memories
+For the love of memories
